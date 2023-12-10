@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow-y: auto;
+            max-height: 400px;
+            padding: 10px;
+            background-color: white;
+        }
+
+        .user-message,
+        .bot-message {
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+            padding: 8px;
+            margin-bottom: 10px;
+            display: inline-block;
+            max-width: 80%;
+        }
+      
+        body {
+            background: linear-gradient(#33DAFF, #B9F7FC);
+            text-align: center;
+        }
+
+        @font-face {
+            font-family: myFirstFont;
+            src: url(sansation_light.woff);
+        }
+
+        @font-face {
+            font-family: myFirstFont;
+            src: url(sansation_bold.woff);
+            font-weight: bold;
+        }
+
+        * {
+            font-family: myFirstFont;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        h1, h2, label {
+            font-family: myFirstFont; /* Apply the custom font to headings and labels */
+        }
+    </style>
+    <title>Page Title</title>
+</head>
+
+<body>
+
+    <h1 class="center">Disease and Dosage Helper Bot</h1>
+    <p class="center">Fill out the questionnaire below!</p>
+
+    <img src="robot-doctor.png" alt="Robot Doctor" width="400" height="345" style="display: block; margin: 0 auto;">
+
+    <h2 class="center">Questions Remaining</h2>
+
+    <form action="/action_page.php" class="center" onsubmit="return submitForm(event)">
+        <label for="fname">First name:</label>
+        <input type="text" id="fname" name="fname"><br><br>
+    </form>
+
+    <div id="outputText" class="center"></div>
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+
+            var firstName = document.getElementById('fname').value;
+            var lastName = document.getElementById('lname').value;
+
+            var outputText = "Submitted! First Name: " + firstName + " Last Name: " + lastName;
+            document.getElementById('outputText').innerHTML = outputText;
+
+            return false;
+        }
+
+      function sendMessage() {
+          // Get user input
+          var userInput = document.getElementById('user-input').value;
+
+          // Display user message with typewriter effect
+          displayMessageWithTypewriter(userInput, 'user-message');
+
+          // Simulate bot response (you can replace this with actual logic)
+          var botResponse = generateBotResponse(userInput);
+
+          // Display bot message with typewriter effect
+          displayMessageWithTypewriter(botResponse, 'bot-message');
+
+          // Clear the input field
+          document.getElementById('user-input').value = '';
+      }
+
+      function displayMessageWithTypewriter(message, className) {
+          var chatContainer = document.getElementById('chat-container');
+          var messageElement = document.createElement('div');
+          messageElement.className = className;
+          chatContainer.appendChild(messageElement);
+
+          // Use a timeout to create a typewriter effect
+          var index = 0;
+          function showNextCharacter() {
+              if (index < message.length) {
+                  messageElement.textContent += message.charAt(index);
+                  index++;
+                  setTimeout(showNextCharacter, 50); // Adjust the delay as needed
+              }
+          }
+
+          showNextCharacter();
+      }
+
+      function generateBotResponse(userInput) {
+          // Replace this with your actual bot logic
+          return "Bot: Thanks for your message - " + userInput;
+      }
+    </script>
+
+</body>
+
+</html>
